@@ -1,0 +1,47 @@
+# Compiler and flags
+CC = gcc                          
+CFLAGS = -Wall -O2 -std=c99           
+OBJ = vector.o spheres.o color.o   
+
+# Default target to compile all executables (MS1, MS2, FS)
+all: MS1 MS2 FS
+
+# MS1 
+MS1: assg_ms1.o $(OBJ)
+	$(CC) $(CFLAGS) -o MS1_assg assg_ms1.o $(OBJ) -lm  
+
+# MS2 
+MS2: assg_ms2.o $(OBJ)
+	$(CC) $(CFLAGS) -o MS2_assg assg_ms2.o $(OBJ) -lm 
+
+# FS 
+FS: assg_fs.o $(OBJ)
+	$(CC) $(CFLAGS) -o FS_assg assg_fs.o $(OBJ) -lm   
+
+# Compile assg.o for MS1 
+assg_ms1.o: src/assg.c src/vector.h src/spheres.h src/color.h
+	$(CC) $(CFLAGS) -DMS1 -c src/assg.c -o assg_ms1.o  
+
+# Compile assg.o for MS2 
+assg_ms2.o: src/assg.c src/vector.h src/spheres.h src/color.h
+	$(CC) $(CFLAGS) -DMS2 -c src/assg.c -o assg_ms2.o  
+
+# Compile assg.o for FS 
+assg_fs.o: src/assg.c src/vector.h src/spheres.h src/color.h
+	$(CC) $(CFLAGS) -DFS -c src/assg.c -o assg_fs.o  
+
+# Compile vector.o from vector.c
+vector.o: src/vector.c src/vector.h
+	$(CC) $(CFLAGS) -c src/vector.c -o vector.o  
+
+# Compile spheres.o from spheres.c
+spheres.o: src/spheres.c src/spheres.h
+	$(CC) $(CFLAGS) -c src/spheres.c -o spheres.o  
+
+# Compile color.o from color.c
+color.o: src/color.c src/color.h src/vector.h
+	$(CC) $(CFLAGS) -c src/color.c -o color.o 
+
+# Clean up object files and executables after build
+clean:
+	rm -f *.o MS1_assg MS2_assg FS_assg  
