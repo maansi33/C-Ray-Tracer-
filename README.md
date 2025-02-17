@@ -17,5 +17,7 @@ Linear Algebra: Applies vector math to detect intersections and render accurate 
 Technologies Used
 
 C: Core programming language.
+
 Linear Algebra: For ray-sphere intersection and rendering.
+
 RGB & HEX: Color handling for shading.
